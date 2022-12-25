@@ -1,34 +1,35 @@
 package Textures.Example1;
 
-import Textures.CardsListener;
+import Textures.AnimListener;
 import com.sun.opengl.util.*;
 
 import javax.media.opengl.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Cards extends JFrame {
+public class Anim2 extends JFrame {
 
-    public static void main(String[] args) {
-        new Cards(new AnimGLEventListener5());
+
+    Anim2(){
+        new Anim(new AnimGLEventListener3());
+
     }
-
-    public Cards(CardsListener aListener) {
+    public Anim2(AnimListener aListener) {
         GLCanvas glcanvas;
         Animator animator;
 
-        CardsListener listener = aListener;
+        AnimListener listener = aListener;
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
-        glcanvas.addMouseListener(listener);
+        glcanvas.addKeyListener(listener);
         getContentPane().add(glcanvas, BorderLayout.CENTER);
-        animator = new FPSAnimator(15);
+        animator = new FPSAnimator(20);
         animator.add(glcanvas);
         animator.start();
 
-        setTitle("Cards");
+        setTitle("Anim Test");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 500);
+        setSize(700, 700);
         setLocationRelativeTo(null);
         setVisible(true);
         setFocusable(true);
