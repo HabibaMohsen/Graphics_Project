@@ -32,7 +32,9 @@ JLabel label ;
             label.add(Settings);
             End.setBounds(250,300,100,50);
             label.add(End);
+            Settings.addActionListener(this);
             Start.addActionListener(this);
+            End.addActionListener(this);
             setVisible(true);
 
     }
@@ -41,6 +43,11 @@ JLabel label ;
     public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(Start)){
         new login();
+    } else if  (e.getSource().equals(Settings)){
+        new Settings();
+    }
+    else if  (e.getSource().equals(End)){
+        new Goodbye();
     }
     }
 

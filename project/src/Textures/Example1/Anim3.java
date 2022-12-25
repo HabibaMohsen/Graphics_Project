@@ -23,7 +23,7 @@ public class Anim3 extends JFrame {
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener(listener);
         getContentPane().add(glcanvas, BorderLayout.CENTER);
-        animator = new FPSAnimator(30);
+        animator = new FPSAnimator(100);
         animator.add(glcanvas);
         animator.start();
 
