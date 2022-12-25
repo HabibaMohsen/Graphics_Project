@@ -76,7 +76,7 @@ public class AnimGLEventListener3 extends AnimListener {
     public void display(GLAutoDrawable gld) {
         timer++;
         if(timer==400){
-            JOptionPane.showMessageDialog(null, "Time Fineshed.", "Time Fineshed.",
+            JOptionPane.showMessageDialog(null, "Congratulations you win..", "Congratulations you win..",
                     JOptionPane.WARNING_MESSAGE);
             System.exit(0);
         }
@@ -89,10 +89,13 @@ public class AnimGLEventListener3 extends AnimListener {
             i=++i%4;
         }
         handleKeyPress();
-        if((mySpeedX==speedEnemyX+7)||(mySpeedX==speedEnemyX2+7)||(mySpeedX==speedEnemyX3+7)||(mySpeedX==speedEnemyX2-6)||(mySpeedX==speedEnemyX-6)||(mySpeedX==speedEnemyX3-6)){
-            JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
-                    JOptionPane.WARNING_MESSAGE);
-            System.exit(0);
+        if((Math.abs(mySpeedY-speedEnemyY1)<9&&Math.abs(mySpeedX-speedEnemyX)<8)||(Math.abs(mySpeedX-speedEnemyX2)<8&&Math.abs(mySpeedY-speedEnemyY2)<9)||((Math.abs(mySpeedX-speedEnemyX3)<8&&Math.abs(mySpeedY-speedEnemyY3)<9))){
+
+                JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
+                        JOptionPane.WARNING_MESSAGE);
+                System.exit(0);
+
+
         }
         DrawSprite(gl, mySpeedX, mySpeedY, j, 1);
 
