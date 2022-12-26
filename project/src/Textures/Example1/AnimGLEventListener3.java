@@ -5,29 +5,43 @@ import Textures.TextureReader;
 
 import javax.media.opengl.*;
 import javax.media.opengl.glu.GLU;
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.BitSet;
 
 public class AnimGLEventListener3 extends AnimListener {
+    int timer=0;
+    int dirI=50;
+    int mySpeedX=45;
+    int mySpeedY=10;
+    int speedEnemyY=-10;
+    int speedEnemyY1=-10;
+    int speedEnemyY2=-10;
+    int speedEnemyY3=-10;
+    int speedEnemyX=25;
+    int speedEnemyX2=54;
+    int speedEnemyX3=65;
+    int dirJ=50;
+    int maxEnemy=1;
 
-    int animationIndex = 0;
-    int animationIndexRoad = 0;
+    int[][] ENEMY = new int[dirI][dirJ];
     int maxWidth = 100;
     int maxHeight = 100;
     int x = (maxWidth / 2)-5, y = (maxHeight / 2)-40;
     boolean start = false;
     int i = 0;
+    int enemyIndex=7;
     int j = 4;
 
     // Download enemy textures from https://craftpix.net/freebies/free-monster-2d-game-items/
-    String textureNames[] = {"road1.jpg","road2.jpg","road3.jpg","road4.jpg","carstright.png","carright.png","carleft.png"};
+    String textureNames[] = {"road1.jpg","road2.jpg","road3.jpg","road4.jpg","carstright.png","carright.png","carleft.png","carenemy_1.png","carenemy2.png","carenemy3.png","carenemy4.png"};
     TextureReader.Texture texture[] = new TextureReader.Texture[textureNames.length];
     int textures[] = new int[textureNames.length];
 
     /*
      5 means gun in array pos
-     x and y coordinate for gun 
+     x and y coordinate for gun
      */
     public void init(GLAutoDrawable gld) {
 
@@ -57,35 +71,54 @@ public class AnimGLEventListener3 extends AnimListener {
                 e.printStackTrace();
             }
         }
-//        gl.glLoadIdentity();
-        //gl.glOrtho(-maxWidth / 2, maxWidth / 2, -maxHeight / 2, maxHeight / 2, -1, 1);
     }
 
     public void display(GLAutoDrawable gld) {
-
+        timer++;
+        if(timer==400){
+            JOptionPane.showMessageDialog(null, "Congratulations you win..", "Congratulations you win..",
+                    JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
+        }
         GL gl = gld.getGL();
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT);       //Clear The Screen And The Depth Buffer
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glLoadIdentity();
 
         DrawBackground(gl, i);
         if(start){
             i=++i%4;
         }
-//        if(start=false) {
-//
-//        }else{
-//            for(int i = 0 ; i<4 ; i++){
-//                DrawBackground(gl, i);
-//                if(i==3){
-//                    i=0;
-//                }
-//            }
-//        }
         handleKeyPress();
-//        animationIndex = animationIndex % 4;
+        if((Math.abs(mySpeedY-speedEnemyY1)<9&&Math.abs(mySpeedX-speedEnemyX)<8)||(Math.abs(mySpeedX-speedEnemyX2)<8&&Math.abs(mySpeedY-speedEnemyY2)<9)||((Math.abs(mySpeedX-speedEnemyX3)<8&&Math.abs(mySpeedY-speedEnemyY3)<9))){
 
-//        DrawGraph(gl);
-        DrawSprite(gl, x, y, j, 1);
+                JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
+                        JOptionPane.WARNING_MESSAGE);
+                System.exit(0);
+
+
+        }
+        DrawSprite(gl, mySpeedX, mySpeedY, j, 1);
+
+        if(start){
+            DrawSprite(gl,speedEnemyX,speedEnemyY1,7,1);
+            DrawSprite(gl,speedEnemyX2+1,speedEnemyY2,8,1);
+            DrawSprite(gl,speedEnemyX3+1,speedEnemyY3,9,1);
+            speedEnemyY=++speedEnemyY%135;
+            speedEnemyY1=speedEnemyY-5;
+            speedEnemyY2=speedEnemyY-20;
+            speedEnemyY3=speedEnemyY-35;
+            if(speedEnemyY>=133){
+                speedEnemyX=(int)((Math.random()*40)+25);
+                speedEnemyX2=(int)((Math.random()*40)+25);
+                speedEnemyX3=(int)((Math.random()*40)+25);
+            }
+
+        }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -139,113 +172,46 @@ public class AnimGLEventListener3 extends AnimListener {
         gl.glDisable(GL.GL_BLEND);
     }
     public void RandomCar(GL gl, int x, int y, int index, double scale) {
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBindTexture(GL.GL_TEXTURE_2D, textures[index]);	// Turn Blending On
 
-
-        gl.glTranslated(x / (100 / 2.0) - 0.9, y / (100 / 2.0) - 0.9, 0);
-        gl.glScaled(0.1 * scale, 0.1 * scale, 1);
-        //System.out.println(x +" " + y);
-        gl.glBegin(GL.GL_QUADS);
-        // Front Face
-        gl.glTexCoord2f(0.0f, 0.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);
-        gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        gl.glTexCoord2f(1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glEnd();
-
-
-        gl.glDisable(GL.GL_BLEND);
     }
-
-    /*
-     * KeyListener
-     */
     public void handleKeyPress() {
         if (isKeyPressed(KeyEvent.VK_LEFT)&&isKeyPressed(KeyEvent.VK_DOWN)) {
             start=true;
-//            if (x > 0) {
-//                x--;
-//            }
-//            if (y > 0) {
-//                y--;
-//            }
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+20;
-
-
         }
         else if (isKeyPressed(KeyEvent.VK_LEFT)&&isKeyPressed(KeyEvent.VK_UP)) {
-//            if (x > 0) {
-//                x--;
-//            }
-//            if (y < maxHeight - 10) {
-//                y++;
-//            }
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+28;
             start=true;
         }else if (isKeyPressed(KeyEvent.VK_RIGHT)&&isKeyPressed(KeyEvent.VK_UP)) {
-//            if (x < maxWidth - 10) {
-//                x++;
-//            }
-//            if (y < maxHeight - 10) {
-//                y++;
-//            }
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+4;
             start=true;
         }else if (isKeyPressed(KeyEvent.VK_RIGHT)&&isKeyPressed(KeyEvent.VK_DOWN)) {
-//            if (x < maxWidth - 10) {
-//                x++;
-//            }
-//            if (y > 0) {
-//                y--;
-//            }
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+12;
             start=true;
         }
 
         else if (isKeyPressed(KeyEvent.VK_LEFT)) {
             start=true;
-            if (x > 0) {
-                x--;
+            if (mySpeedX > 25) {
+                mySpeedX--;
             }
-           j=6;
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+24;
-
+            j=6;
         }
         else if (isKeyPressed(KeyEvent.VK_RIGHT)) {
             start=true;
-            if (x < maxWidth - 10) {
-                x++;
+            if (mySpeedX < maxWidth - 35) {
+                mySpeedX++;
             }
             j=5;
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+8;
-
         }
         else if (isKeyPressed(KeyEvent.VK_DOWN)) {
-//            if (y > 0) {
-//                y--;
-//            }
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+16;
             start=true;
+            if(mySpeedY>10){
+                mySpeedY--;
+            }
         }
-       else if (isKeyPressed(KeyEvent.VK_UP)) {
-//            if (y < maxHeight - 10) {
-//                y++;
-//            }
-//            animationIndex++;
-//            animationIndex = (animationIndex%4);
+        else if (isKeyPressed(KeyEvent.VK_UP)) {
             start=true;
+            if(mySpeedY<90){
+                mySpeedY++;
+                //speedEnemyY-=0.6;
+            }
         }
 
     }
@@ -265,30 +231,29 @@ public class AnimGLEventListener3 extends AnimListener {
         ///////////////////////////////////////////////////////////////////////////////
         if (!isKeyPressed(KeyEvent.VK_LEFT)) {
             start=true;
-            if (x > 0) {
-                x--;
+            if (mySpeedX > 25) {
+                mySpeedX--;
             }
             j=4;
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+24;
 
         }
         else if (!isKeyPressed(KeyEvent.VK_RIGHT)) {
             start=true;
-            if (x < maxWidth - 10) {
-                x++;
+            if (mySpeedX < maxWidth - 35) {
+                mySpeedX++;
             }
             j=4;
-//            animationIndex++;
-//            animationIndex = (animationIndex%4)+8;
 
         }
         /////////////////////////////////////////////////////////////////////////////////
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void keyTyped(final KeyEvent event) {
-        // don't care 
+        // don't care
     }
 
     public boolean isKeyPressed(final int keyCode) {

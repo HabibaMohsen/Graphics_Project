@@ -7,14 +7,14 @@ import javax.media.opengl.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Anim extends JFrame {
+public class Anim2 extends JFrame {
 
 
- Anim(){
-     new Anim(new AnimGLEventListener3());
+    Anim2(){
+        new Anim(new AnimGLEventListener3());
 
- }
-    public Anim(AnimListener aListener) {
+    }
+    public Anim2(AnimListener aListener) {
         GLCanvas glcanvas;
         Animator animator;
 
@@ -23,7 +23,7 @@ public class Anim extends JFrame {
         glcanvas.addGLEventListener(listener);
         glcanvas.addKeyListener(listener);
         getContentPane().add(glcanvas, BorderLayout.CENTER);
-        animator = new FPSAnimator(15);
+        animator = new FPSAnimator(50);
         animator.add(glcanvas);
         animator.start();
 

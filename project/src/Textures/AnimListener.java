@@ -8,6 +8,6 @@ import java.awt.event.KeyListener;
 
 public abstract class AnimListener implements GLEventListener, KeyListener {
  
-    protected String assetsFolderName = "Assets";
+    protected String assetsFolderName = "./Project/Assets";
     
 }
