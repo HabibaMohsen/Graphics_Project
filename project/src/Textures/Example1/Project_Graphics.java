@@ -11,7 +11,7 @@ JLabel label ;
     JButton Start = new JButton("Start");
     JButton Settings = new JButton("Settings");
     JButton End = new JButton("End");
-
+    Sound sound =new Sound();
     public static void  main(String[]args){
         new Project_Graphics();
     }
@@ -36,7 +36,7 @@ JLabel label ;
             Start.addActionListener(this);
             End.addActionListener(this);
             setVisible(true);
-
+       sound.playMusic(0);
     }
 
     @Override
@@ -50,6 +50,5 @@ JLabel label ;
         new Goodbye();
     }
     }
-
 
     }
