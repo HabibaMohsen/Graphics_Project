@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class login extends JFrame implements ActionListener {
+public class login2 extends JFrame implements ActionListener {
     JButton easy = new JButton(" Easy ");
     JButton medium = new JButton(" Medium ");
     JButton Hard = new JButton(" Hard ");
@@ -14,7 +14,7 @@ public class login extends JFrame implements ActionListener {
 
 
 
-    public login(){
+    public login2(){
         setSize(600,600);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(this);
@@ -30,7 +30,7 @@ public class login extends JFrame implements ActionListener {
         medium.setBounds(250,200,100,50);
         label2.add(medium);
         Hard.setBounds(250,300,100,50);
-    label2.add(Hard);
+        label2.add(Hard);
 
         easy.addActionListener(this);
         medium.addActionListener(this);
@@ -40,15 +40,15 @@ public class login extends JFrame implements ActionListener {
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(easy)){
-            new Anim ( );
+            new Anim4 ( );
         }
         else if (e.getSource().equals(medium)){
-            new Anim2 ();
+            new Anim5 ();
         }
         else if (e.getSource().equals(Hard)){
-            new Anim3 ();
+            new Anim6 ();
         }
 
-}
+    }
 
 }

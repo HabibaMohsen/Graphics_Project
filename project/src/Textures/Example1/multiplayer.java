@@ -348,7 +348,5 @@ public class multiplayer extends AnimListener {
         return keyBits.get(keyCode);
     }
 
-    public static void main(String[] args) {
-        new Anim(new multiplayer());
-    }
+
 }
