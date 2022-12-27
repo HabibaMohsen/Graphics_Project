@@ -76,7 +76,7 @@ public class AnimGLEventListener3 extends AnimListener {
 
     public void display(GLAutoDrawable gld) {
         timer++;
-        if(timer==400){
+        if(timer==400 &&start){
             sound.playSE(2);
 
             JOptionPane.showMessageDialog(null, "Congratulations you win..", "Congratulations you win..",

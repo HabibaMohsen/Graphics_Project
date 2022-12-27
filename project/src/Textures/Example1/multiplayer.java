@@ -78,7 +78,7 @@ public class multiplayer extends AnimListener {
 
     public void display(GLAutoDrawable gld) {
         timer++;
-        if(timer==400){
+        if(timer==400 && start){
             JOptionPane.showMessageDialog(null, "Congratulations you win..", "Congratulations you win..",
                     JOptionPane.WARNING_MESSAGE);
             System.exit(0);
@@ -101,6 +101,14 @@ public class multiplayer extends AnimListener {
 
         }
         if((Math.abs(mySpeedY2-speedEnemyY1)<9&&Math.abs(mySpeedX2-speedEnemyX)<8)||(Math.abs(mySpeedX2-speedEnemyX2)<8&&Math.abs(mySpeedY2-speedEnemyY2)<9)||((Math.abs(mySpeedX2-speedEnemyX3)<8&&Math.abs(mySpeedY2-speedEnemyY3)<9))){
+            JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
+                    JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
+
+
+        }
+        //collesion the two multiplayer
+        if((Math.abs(mySpeedY2-mySpeedY)<9&&Math.abs(mySpeedX2-mySpeedX)<8)){
             JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
                     JOptionPane.WARNING_MESSAGE);
             System.exit(0);
