@@ -11,7 +11,7 @@ public class Anim6 extends JFrame {
 
 
     Anim6(){
-        new Anim(new multiplayer());
+        new Anim6( new multiplayer() );
 
     }
     public Anim6(AnimListener aListener) {

@@ -42,7 +42,7 @@ JLabel label ;
     @Override
     public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(Start)){
-        new Type_Play();
+        new Users();
     } else if  (e.getSource().equals(Settings)){
         new Settings();
     }

@@ -11,7 +11,7 @@ public class Anim3 extends JFrame {
 
 
     Anim3(){
-        new Anim(new AnimGLEventListener3());
+        new Anim3(new AnimGLEventListener3());
 
     }
     public Anim3(AnimListener aListener) {

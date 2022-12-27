@@ -11,7 +11,7 @@ public class Anim4 extends JFrame {
 
 
     Anim4(){
-        new Anim(new multiplayer());
+        new Anim4(new multiplayer());
 
     }
     public Anim4(AnimListener aListener) {
