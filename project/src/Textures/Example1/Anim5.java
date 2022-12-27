@@ -11,7 +11,7 @@ public class Anim5 extends JFrame {
 
 
     Anim5(){
-        new Anim(new AnimGLEventListener3());
+        new Anim(new multiplayer());
 
     }
     public Anim5(AnimListener aListener) {
