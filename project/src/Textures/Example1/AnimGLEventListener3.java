@@ -33,6 +33,7 @@ public class AnimGLEventListener3 extends AnimListener {
     int i = 0;
     int enemyIndex=7;
     int j = 4;
+    Sound sound =new Sound();
 
     // Download enemy textures from https://craftpix.net/freebies/free-monster-2d-game-items/
     String textureNames[] = {"road1.jpg","road2.jpg","road3.jpg","road4.jpg","carstright.png","carright.png","carleft.png","carenemy_1.png","carenemy2.png","carenemy3.png","carenemy4.png"};
@@ -76,6 +77,8 @@ public class AnimGLEventListener3 extends AnimListener {
     public void display(GLAutoDrawable gld) {
         timer++;
         if(timer==400){
+            sound.playSE(2);
+
             JOptionPane.showMessageDialog(null, "Congratulations you win..", "Congratulations you win..",
                     JOptionPane.WARNING_MESSAGE);
             System.exit(0);
@@ -90,7 +93,7 @@ public class AnimGLEventListener3 extends AnimListener {
         }
         handleKeyPress();
         if((Math.abs(mySpeedY-speedEnemyY1)<9&&Math.abs(mySpeedX-speedEnemyX)<8)||(Math.abs(mySpeedX-speedEnemyX2)<8&&Math.abs(mySpeedY-speedEnemyY2)<9)||((Math.abs(mySpeedX-speedEnemyX3)<8&&Math.abs(mySpeedY-speedEnemyY3)<9))){
-
+           sound.playSE(1);
                 JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
                         JOptionPane.WARNING_MESSAGE);
                 System.exit(0);
@@ -215,6 +218,8 @@ public class AnimGLEventListener3 extends AnimListener {
         }
 
     }
+
+
 
     public BitSet keyBits = new BitSet(256);
 
