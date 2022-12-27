@@ -36,6 +36,7 @@ public class multiplayer extends AnimListener {
     int enemyIndex=7;
     int j = 4;
     int j2=7;
+    Sound sound =new Sound();
 
     // Download enemy textures from https://craftpix.net/freebies/free-monster-2d-game-items/
     String textureNames[] = {"road1_2.jpg","road2_3.jpg","road3.jpg","road4_3.jpg","carstright.png","carright.png","carleft.png","carstright1.png","carright1.png","carleft1.png","carenemy_1.png","carenemy2.png","carenemy3.png","carenemy4.png"};
@@ -79,6 +80,7 @@ public class multiplayer extends AnimListener {
     public void display(GLAutoDrawable gld) {
         timer++;
         if(timer==400 && start){
+            sound.playSE(2);
             JOptionPane.showMessageDialog(null, "Congratulations you win..", "Congratulations you win..",
                     JOptionPane.WARNING_MESSAGE);
             System.exit(0);
@@ -94,6 +96,7 @@ public class multiplayer extends AnimListener {
         handleKeyPress();
         if((Math.abs(mySpeedY-speedEnemyY1)<9&&Math.abs(mySpeedX-speedEnemyX)<8)||(Math.abs(mySpeedX-speedEnemyX2)<8&&Math.abs(mySpeedY-speedEnemyY2)<9)||((Math.abs(mySpeedX-speedEnemyX3)<8&&Math.abs(mySpeedY-speedEnemyY3)<9))){
 
+            sound.playSE(1);
             JOptionPane.showMessageDialog(null, "GameOver.", "GameOver",
                     JOptionPane.WARNING_MESSAGE);
             System.exit(0);
